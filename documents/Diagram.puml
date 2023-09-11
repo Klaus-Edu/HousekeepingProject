@@ -1,0 +1,157 @@
+@startuml
+class com.portfolio.housekeeping.services.AccommodationServ {
+- AccommodationRepo accommodationRepo
++ List<Accommodation> findAllAccommodations()
++ Optional<Accommodation> findById(Long)
++ Accommodation saveAccommodation(Accommodation)
++ void deleteAccommodation(Long)
+}
+class com.portfolio.housekeeping.HousekeepingApplication {
++ {static} void main(String[])
+}
+class com.portfolio.housekeeping.services.ReservationServ {
+- ReservationRepo reservationRepo
++ List<Reservation> findAllReservation()
++ Optional<Reservation> findById(Long)
++ Reservation saveReservation(Reservation)
++ void deleteReservation(Long)
++ void saveListReservation(List<Reservation>)
+}
+interface com.portfolio.housekeeping.repositories.AccommodationRepo {
+}
+class com.portfolio.housekeeping.config.SwaggerConfig {
++ OpenAPI api()
+- Map<String,Schema> generateSchemas()
+}
+class com.portfolio.housekeeping.DTOs.AccommodationDto {
+- String name
+- String observation
+- CleaningStatus cleaningStatus
+- OccupationStatus occupationStatus
+}
+class com.portfolio.housekeeping.config.CorsFilter {
++ void doFilter(ServletRequest,ServletResponse,FilterChain)
+}
+interface com.portfolio.housekeeping.repositories.ReservationRepo {
+}
+class com.portfolio.housekeeping.services.exceptions.IllegalArgException {
+}
+class com.portfolio.housekeeping.models.ExtraServices {
+- Long id
+- Boolean extraCleaning
+- Boolean extraBed
+- Boolean extraCradle
+- Accommodation accommodation
+}
+enum com.portfolio.housekeeping.models.enums.CleaningStatus {
++  SUJO
++  LIMPO
+- int code
++ int getCode()
++ {static} CleaningStatus valueOf(int)
+}
+class com.portfolio.housekeeping.resource.AccommodationResource {
+- AccommodationServ accommodationServ
++ ResponseEntity<List<Accommodation>> findAll()
++ ResponseEntity<Accommodation> findById(Long)
++ ResponseEntity<Object> addAccommodation(AccommodationDto)
++ ResponseEntity<Object> editAccommodation(Long,AccommodationDto)
++ ResponseEntity<Object> editExtras(Long,ExtraServicesDto)
++ ResponseEntity<Object> editObservations(Long,PartialAccommodationDto)
++ void deleteAccommodation(Long)
+}
+class com.portfolio.housekeeping.resource.exceptions.ResourceExceptionHandler {
++ ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException,HttpServletRequest)
++ ResponseEntity<StandardError> illegalArg(IllegalArgException,HttpServletRequest)
+}
+class com.portfolio.housekeeping.DTOs.ReservationDto {
+- String holderName
+- int adults
+- int child
+- int babies
+- Boolean hasPet
+- LocalDate checkin
+- LocalDate checkout
+- Long accommodationIdReference
+}
+class com.portfolio.housekeeping.models.Accommodation {
+- Long id
+- String name
+- String observation
+- Integer cleaningStatus
+- Integer occupationStatus
+- List<Reservation> reservation
+- ExtraServices extraServices
++ CleaningStatus getCleaningStatus()
++ void setCleaningStatus(CleaningStatus)
++ OccupationStatus getOccupationStatus()
++ void setOccupationStatus(OccupationStatus)
+}
+class com.portfolio.housekeeping.DTOs.ExtraServicesDto {
+- Boolean extraCleaning
+- Boolean extraBed
+- Boolean extraCradle
+}
+class com.portfolio.housekeeping.models.Reservation {
+- Long id
+- String holderName
+- int adults
+- int child
+- int babies
+- Boolean hasPet
+- LocalDate checkin
+- LocalDate checkout
+- Boolean isActive
+- Long accommodationIdReference
+- Accommodation accommodation
+}
+class com.portfolio.housekeeping.resource.jobs.CheckoutJob {
+- ReservationServ reservationServ
+- AccommodationServ accommodationServ
++ void inactiveReservation()
++ void activeReservation()
++ void occupationStatusActive()
+}
+class com.portfolio.housekeeping.resource.exceptions.StandardError {
+- Instant timestamp
+- Integer status
+- String error
+- String message
+- String path
+}
+class com.portfolio.housekeeping.services.exceptions.ResourceNotFoundException {
+}
+enum com.portfolio.housekeeping.models.enums.OccupationStatus {
++  DESOCUPADO
++  OCUPADO
++  MANUTENCAO
+- int code
++ int getCode()
++ {static} OccupationStatus valueOf(int)
+}
+class com.portfolio.housekeeping.resource.ReservationResource {
+- ReservationServ reservationServ
+- AccommodationServ accommodationServ
++ ResponseEntity<List<Reservation>> findAll()
++ ResponseEntity<Reservation> findById(Long)
++ ResponseEntity<Object> addReservation(ReservationDto)
++ ResponseEntity<Object> editReservation(Long,ReservationDto)
++ void deleteReservation(Long)
+}
+class com.portfolio.housekeeping.DTOs.PartialAccommodationDto {
+- String observation
+- CleaningStatus cleaningStatus
+- OccupationStatus occupationStatus
+}
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- com.portfolio.housekeeping.repositories.AccommodationRepo
+com.portfolio.housekeeping.config.Filter <|.. com.portfolio.housekeeping.config.CorsFilter
+org.springframework.data.jpa.repository.JpaRepository <|-- com.portfolio.housekeeping.repositories.ReservationRepo
+com.portfolio.housekeeping.services.exceptions.RuntimeException <|-- com.portfolio.housekeeping.services.exceptions.IllegalArgException
+java.io.Serializable <|.. com.portfolio.housekeeping.models.ExtraServices
+java.io.Serializable <|.. com.portfolio.housekeeping.models.Accommodation
+java.io.Serializable <|.. com.portfolio.housekeeping.models.Reservation
+java.io.Serializable <|.. com.portfolio.housekeeping.resource.exceptions.StandardError
+com.portfolio.housekeeping.services.exceptions.RuntimeException <|-- com.portfolio.housekeeping.services.exceptions.ResourceNotFoundException
+@enduml

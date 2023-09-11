@@ -1,0 +1,197 @@
+@startuml
+
+title House Keeper - EndPointTracker
+
+skinparam stereotypeCBackgroundColor<<representation>> DimGray
+skinparam stereotypeCBackgroundColor<<api>> Red
+skinparam stereotypeCBackgroundColor<<resource>> SpringGreen
+skinparam class {
+BackgroundColor<<api>> Yellow
+BackgroundColor<<representation>> Silver
+BackgroundColor<<resource>> YellowGreen
+}
+
+class "House Keeper" <<api>>
+
+class "/reservation" <<resource>> {
+__ http __
+}
+
+"House Keeper" --> "/reservation"
+
+class "/add" <<resource>> {
+__ http __
+post(reservationDTO)
+}
+
+"/reservation" --> "/add"
+
+class "/get" <<resource>> {
+__ http __
+}
+
+"/reservation" --> "/get"
+
+class "/all" <<resource>> {
+__ http __
+get()
+}
+
+"/get" --> "/all"
+
+class "/{id}" <<resource>> {
+__ http __
+get(ReservationId)
+}
+
+"/get" --> "/{id}"
+
+class "/edit" <<resource>> {
+__ http __
+}
+
+"/reservation" --> "/edit"
+
+class "/{id}" <<resource>> {
+__ http __
+put(id, reservationDTO)
+}
+
+"/edit" --> "/{id}"
+
+class "/delete" <<resource>> {
+__ http __
+}
+
+"/reservation" --> "/delete"
+
+class "/{id}" <<resource>> {
+__ http __
+delete(id)
+}
+
+"/delete" --> "/{id}"
+
+class "/accommodations" <<resource>> {
+__ http __
+}
+
+"House Keeper" --> "/accommodations"
+
+class "add" <<resource>> {
+__ http __
+post(AccommodationDTO)
+}
+
+"/accommodations" --> "add"
+
+class "get" <<resource>> {
+__ http __
+}
+
+"/accommodations" --> "get"
+
+class "all" <<resource>> {
+__ http __
+get()
+}
+
+"get" --> "all"
+
+class "{id}" <<resource>> {
+__ http __
+get(AccommodationId)
+}
+
+"get" --> "{id}"
+
+class "edit" <<resource>> {
+__ http __
+}
+
+"/accommodations" --> "edit"
+
+class "{id}" <<resource>> {
+__ http __
+put(AccommodationId, AccommodationDTO)
+}
+
+"edit" --> "{id}"
+
+class "extra" <<resource>> {
+__ http __
+}
+
+"edit" --> "extra"
+
+class "{id}" <<resource>> {
+__ http __
+patch(AccommodationId, ExtraServiceDTO)
+}
+
+"extra" --> "{id}"
+
+class "obs" <<resource>> {
+__ http __
+}
+
+"edit" --> "obs"
+
+class "{id}" <<resource>> {
+__ http __
+patch(AccommodationId, PartialAccommodationDTO)
+}
+
+"obs" --> "{id}"
+
+class "delete" <<resource>> {
+__ http __
+}
+
+"/accommodations" --> "delete"
+
+class "{id}" <<resource>> {
+__ http __
+delete(AccommodationId)
+}
+
+"delete" --> "{id}"
+
+package Representations <<Folder>> {
+
+class reservationDTO <<representation>>{
+--Properties--
+holderName
+adults
+child
+babies
+hasPet
+checkin
+checkout
+accommodationIdReference
+}
+
+class AccommodationDTO <<representation>>{
+--Properties--
+name
+observation
+cleaningStatus
+occupationStatus
+}
+
+class ExtraServiceDTO <<representation>>{
+--Properties--
+extraCleaning
+extraBed
+extraCradle
+}
+
+class PartialAccommodationDTO <<representation>>{
+--Properties--
+observation
+cleaningStatus
+occupationStatus
+}
+
+}
+@enduml
