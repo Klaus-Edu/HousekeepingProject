@@ -8,17 +8,17 @@ public enum OccupationStatus {
 
     private final int code;
 
-    OccupationStatus(int code){
+    OccupationStatus(int code) {
         this.code = code;
     }
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
 
-    public static OccupationStatus valueOf(int code){
-        for(OccupationStatus value : OccupationStatus.values()){
-            if(value.getCode() == code){
+    public static OccupationStatus valueOf(int code) {
+        for (OccupationStatus value : OccupationStatus.values()) {
+            if (value.getCode() == code) {
                 return value;
             }
         }

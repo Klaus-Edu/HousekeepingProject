@@ -1,4 +1,5 @@
 package com.portfolio.housekeeping.config;
+
 import com.portfolio.housekeeping.resource.exceptions.ResourceExceptionHandler;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.models.Components;
@@ -31,7 +32,7 @@ public class SwaggerConfig {
                 .components(new Components().schemas(generateSchemas()));
     }
 
-    private Map<String, Schema> generateSchemas(){
+    private Map<String, Schema> generateSchemas() {
         final Map<String, Schema> schemaMap = new HashMap<>();
         Map<String, Schema> problemSchema = ModelConverters.getInstance().read(ResourceExceptionHandler.class);
         schemaMap.putAll(schemaMap);

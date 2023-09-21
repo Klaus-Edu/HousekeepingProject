@@ -25,17 +25,25 @@ public class AccommodationResource {
     private final AccommodationServ accommodationServ;
 
     @GetMapping("/get/all")
-    public ResponseEntity<List<Accommodation>> findAll(){
-        return new ResponseEntity<>(accommodationServ.findAllAccommodations(), HttpStatus.OK);
+    public ResponseEntity<List<Accommodation>> findAll() {
+        List<Accommodation> list = accommodationServ.findAllAccommodations();
+        if (list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Accommodation> findById(@PathVariable(value = "id") Long id){
-        return new ResponseEntity<>(accommodationServ.findById(id).get(), HttpStatus.OK);
+    public ResponseEntity<Accommodation> findById(@PathVariable(value = "id") Long id) {
+        Optional<Accommodation> accommodation = accommodationServ.findById(id);
+
+        return accommodation.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Object> addAccommodation(@RequestBody @Valid AccommodationDto accommodationDto){
+    public ResponseEntity<Object> addAccommodation(@RequestBody @Valid AccommodationDto accommodationDto) {
         Accommodation accommodation = new Accommodation(null,
                 accommodationDto.getName(),
                 accommodationDto.getObservation(),
@@ -52,47 +60,70 @@ public class AccommodationResource {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Object> editAccommodation(@PathVariable(value = "id") Long id, @RequestBody @Valid AccommodationDto accommodationDto){
+    public ResponseEntity<Object> editAccommodation(@PathVariable(value = "id") Long id, @RequestBody @Valid AccommodationDto accommodationDto) {
+
         Optional<Accommodation> optional = accommodationServ.findById(id);
 
-        Accommodation accommodation = optional.get();
+        if (optional.isPresent()) {
+            Accommodation accommodation = optional.get();
 
-        accommodation.setName(accommodationDto.getName());
-        accommodation.setObservation(accommodationDto.getObservation());
-        accommodation.setCleaningStatus(accommodationDto.getCleaningStatus());
-        accommodation.setOccupationStatus(accommodationDto.getOccupationStatus());
-        accommodation.setId(optional.get().getId());
+            accommodation.setName(accommodationDto.getName());
+            accommodation.setObservation(accommodationDto.getObservation());
+            accommodation.setCleaningStatus(accommodationDto.getCleaningStatus());
+            accommodation.setOccupationStatus(accommodationDto.getOccupationStatus());
+            accommodation.setId(optional.get().getId());
 
-        return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+            return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PatchMapping("/edit/extra/{id}")
-    public ResponseEntity<Object> editExtras(@PathVariable(value = "id") Long id, @RequestBody @Valid ExtraServicesDto extraServicesDto){
+    public ResponseEntity<Object> editExtras(@PathVariable(value = "id") Long id, @RequestBody @Valid ExtraServicesDto extraServicesDto) {
         Optional<Accommodation> optional = accommodationServ.findById(id);
 
-        Accommodation accommodation = optional.get();
-        ExtraServices services = new ExtraServices(id, extraServicesDto.getExtraCleaning(), extraServicesDto.getExtraBed(), extraServicesDto.getExtraCradle(), accommodation);
-        accommodation.setExtraServices(services);
+        if (optional.isPresent()) {
+            Accommodation accommodation = optional.get();
+            ExtraServices services = new ExtraServices(id, extraServicesDto.getExtraCleaning(), extraServicesDto.getExtraBed(), extraServicesDto.getExtraCradle(), accommodation);
+            accommodation.setExtraServices(services);
 
-        return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+            return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PatchMapping("/edit/obs/{id}")
-    public ResponseEntity<Object> editObservations(@PathVariable(value = "id") Long id, @RequestBody @Valid PartialAccommodationDto partialDto){
+    public ResponseEntity<Object> editObservations(@PathVariable(value = "id") Long id, @RequestBody @Valid PartialAccommodationDto partialDto) {
         Optional<Accommodation> optional = accommodationServ.findById(id);
 
-        Accommodation accommodation = optional.get();
-        accommodation.setObservation(partialDto.getObservation());
-        accommodation.setOccupationStatus(partialDto.getOccupationStatus());
-        accommodation.setCleaningStatus(partialDto.getCleaningStatus());
-        accommodation.setId(id);
+        if (optional.isPresent()) {
+            Accommodation accommodation = optional.get();
+            accommodation.setObservation(partialDto.getObservation());
+            accommodation.setOccupationStatus(partialDto.getOccupationStatus());
+            accommodation.setCleaningStatus(partialDto.getCleaningStatus());
+            accommodation.setId(id);
 
-        return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+            return new ResponseEntity<>(accommodationServ.saveAccommodation(accommodation), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAccommodation(@PathVariable(value = "id") Long id){
-        accommodationServ.deleteAccommodation(id);
+    public ResponseEntity<Object> deleteAccommodation(@PathVariable(value = "id") Long id) {
+        Optional<Accommodation> accommodation = accommodationServ.findById(id);
+
+        if (accommodation.isPresent()) {
+            accommodationServ.deleteAccommodation(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 

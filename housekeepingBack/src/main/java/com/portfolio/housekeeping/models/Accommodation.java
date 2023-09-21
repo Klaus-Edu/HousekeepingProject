@@ -30,7 +30,8 @@ public class Accommodation implements Serializable {
     @OneToOne(mappedBy = "accommodation", cascade = CascadeType.ALL)
     private ExtraServices extraServices;
 
-    public Accommodation(){}
+    public Accommodation() {
+    }
 
     public Accommodation(Long id, String name, String observation, CleaningStatus cleaningStatus, OccupationStatus occupationStatus, List<Reservation> reservation, ExtraServices extraServices) {
         this.id = id;
@@ -47,8 +48,8 @@ public class Accommodation implements Serializable {
     }
 
     public void setCleaningStatus(CleaningStatus cleaningStatus) {
-        if(cleaningStatus != null){
-        this.cleaningStatus = cleaningStatus.getCode();
+        if (cleaningStatus != null) {
+            this.cleaningStatus = cleaningStatus.getCode();
         }
     }
 
@@ -57,8 +58,19 @@ public class Accommodation implements Serializable {
     }
 
     public void setOccupationStatus(OccupationStatus occupationStatus) {
-        if(occupationStatus != null){
-        this.occupationStatus = occupationStatus.getCode();
+        if (occupationStatus != null) {
+            this.occupationStatus = occupationStatus.getCode();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Accommodation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", observation='" + observation + '\'' +
+                ", cleaningStatus=" + cleaningStatus +
+                ", occupationStatus=" + occupationStatus +
+                '}';
     }
 }

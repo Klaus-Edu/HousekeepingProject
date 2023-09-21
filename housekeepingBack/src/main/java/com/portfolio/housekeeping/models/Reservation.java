@@ -6,10 +6,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.cglib.core.Local;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 
 @Entity
@@ -27,9 +25,9 @@ public class Reservation implements Serializable {
     private int child;
     private int babies;
     private Boolean hasPet;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkin;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkout;
     private Boolean isActive;
     private Long accommodationIdReference;

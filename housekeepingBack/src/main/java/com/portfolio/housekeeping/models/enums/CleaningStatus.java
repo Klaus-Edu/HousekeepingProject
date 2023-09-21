@@ -7,17 +7,17 @@ public enum CleaningStatus {
 
     private int code;
 
-    private CleaningStatus(int code){
+    private CleaningStatus(int code) {
         this.code = code;
     }
 
-    public int getCode(){
+    public int getCode() {
         return code;
     }
 
-    public static CleaningStatus valueOf(int code){
-        for(CleaningStatus value : CleaningStatus.values()){
-            if(value.getCode() == code){
+    public static CleaningStatus valueOf(int code) {
+        for (CleaningStatus value : CleaningStatus.values()) {
+            if (value.getCode() == code) {
                 return value;
             }
         }
