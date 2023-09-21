@@ -56,3 +56,15 @@ Os próximos passos para este projeto incluem:
 - Implementar autenticação de usuários para ter maior controle sobre alterações de informações.
 - Melhorar a lógica de disponibilização de uma reserva por acomodação.
 - Tornar o frontend mais agradável e amigável.
+
+## Como rodar o Projeto localmente
+
+Backend
+- Certifique-se de que você tenha o Java JDK e o PostgreSQL instalados em sua máquina.
+- Clone o repositório do projeto em seu computador.
+- Crie um banco de dados PostgreSQL local com o nome especificado no arquivo [aplication.properties](https://github.com/Klaus-Edu/HousekeepingProject/blob/main/housekeepingBack/src/main/resources/application.properties) de configuração do projeto.
+- Inicialize a aplicação Spring.
+
+Frontend
+- Certifique-se de que você tenha o Node.js e o Angular CLI instalados em sua máquina.
+- Inicialize a aplicação Angular com "ng serve".
