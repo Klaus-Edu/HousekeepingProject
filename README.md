@@ -61,4 +61,5 @@ Os próximos passos para este projeto incluem:
 
 - Certifique-se de ter instalado em sua máquina o Docker e Docker-Compose, e que estejam atualizados;
 - Abra um prompt de comando na pasta raiz do repositorio e rode o comando "docker-compose up";
+- Acesse a aplicação pela url "localhost:8082"
 - Para finalizar a aplicação utilize o comando "docker-compose down";
