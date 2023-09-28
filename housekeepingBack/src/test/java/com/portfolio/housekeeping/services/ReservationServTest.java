@@ -20,7 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.never;
 
 @ExtendWith(MockitoExtension.class)
 class ReservationServTest {
