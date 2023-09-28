@@ -48,6 +48,9 @@ Alguns aspectos interessantes deste projeto incluem:
   - RouterModule
   - NgbModule
   - FormsModule
+ 
+- Docker Desktop
+- Docker-Compose
 
 ## Próximos Passos
 
@@ -60,6 +63,20 @@ Os próximos passos para este projeto incluem:
 ## Como rodar o Projeto localmente
 
 - Certifique-se de ter instalado em sua máquina o Docker e Docker-Compose, e que estejam atualizados;
-- Abra um prompt de comando na pasta raiz do repositorio e rode o comando "docker-compose up";
-- Acesse a aplicação pela url "localhost:8082"
-- Para finalizar a aplicação utilize o comando "docker-compose down";
+- Certifique-se de possuir WSL2 intalado para conseguir utilizar os container apropriadamente;
+- No diretório raiz do Backend, localizado na pasta housekeepingBack, em um terminal rode o comando:
+  
+  ```
+  mvn package -DskipTests
+  ```
+- Na pasta raiz do projeto, onde esta o arquivo `docker-compose.yml` em um terminal rode o comando:
+  
+  ```
+  docker-compose up
+  ```
+- Acesse a aplicação pela url `localhost:8082`;
+- Para finalizar a aplicação utilize o comando:
+
+  ```
+  docker-compose down
+  ```
