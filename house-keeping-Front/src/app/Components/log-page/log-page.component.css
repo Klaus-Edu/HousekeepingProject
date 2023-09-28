@@ -1,0 +1,38 @@
+*{
+    font-family: Roboto;
+}
+
+.container{
+    border: 2px solid #282E69;
+    background-color: #C9CDF2;
+    border-radius: 5px;
+}
+
+#header{
+    padding: 15px 0 15px 0;
+    color: #282E69;
+}
+
+#searchInput{
+    margin: 5px 0 5px 0;
+}
+
+table{ 
+    border: 2px solid #282E69;
+}
+
+thead>tr>th{
+    background-color: #282E69;
+    font-weight: 500;
+    color: #FFFFFF;
+    
+}
+.table-responsive, tbody>tr{
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+th, td{
+    text-align: center;
+}
+

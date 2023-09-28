@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+
+<!--Cards-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4" *ngFor="let accommodation of accommodations">
+      <div class="dropdown-item" (click)="openInfoModal(accommodation)">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title mb-3">{{accommodation.name}}</h5>
+                <div>
+                  <p [ngClass]="getAccommodationStatus(accommodation.occupationStatus)">
+                    {{accommodation.occupationStatus}}</p>
+                </div>
+                <div>
+                  <p [ngClass]="getCleaningStatus(accommodation.cleaningStatus)">{{accommodation.cleaningStatus}}</p>
+                </div>
+                <div>
+                  <p *ngIf="accommodation.activeReservation?.hasPet !== undefined"
+                    [ngClass]="getHasPetStatus(accommodation.activeReservation?.hasPet)">
+                    {{accommodation.activeReservation?.hasPet ? 'PET' : 'PET'}}</p>
+                </div>
+              </div>
+              <div class="col">
+                <p class="guestNumber">
+                  {{ accommodation.activeReservation?.adults !== null ? accommodation.activeReservation?.adults : '0' }}
+                  /
+                  {{ accommodation.activeReservation?.child !== null ? accommodation.activeReservation?.child : '0' }}
+                  /
+                  {{ accommodation.activeReservation?.babies !== null ? accommodation.activeReservation?.babies : '0' }}
+                </p>
+                <div class="text-end">
+                  <p *ngIf="accommodation.activeReservation?.checkin !== null" class="checkin">CHECK-IN:
+                    {{accommodation.activeReservation?.checkin | dateFormat:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="text-end">
+                  <p *ngIf="accommodation.activeReservation?.checkin !== null" class="checkout">CHECK-OUT:
+                    {{accommodation.activeReservation?.checkout | dateFormat:'dd/MM/yyyy'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal-->
+<ng-template #infoAccommodation let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Informações da Acomodação | {{selectedAcc.name}}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <form #AccInfoForm="ngForm" id="AccInfoForm">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col">
+          <div class="form-check form-switch">
+            <label class="form-check-label" for="extraCleaning">Arrumação Agendada</label>
+            <input class="form-check-input" [(ngModel)]="selectedAcc.extraServices.extraCleaning" type="checkbox"
+              name="extraCleaning" id="extraCleaning">
+          </div>
+          <div class="form-check form-switch">
+            <label class="form-check-label" for="extraBed">Cama Extra</label>
+            <input class="form-check-input" [(ngModel)]="selectedAcc.extraServices.extraBed" type="checkbox"
+              name="extraBed" id="extraBed">
+          </div>
+          <div class="form-check form-switch mb-3">
+            <label class="form-check-label" for="extraCradle">Berço</label>
+            <input class="form-check-input" [(ngModel)]="selectedAcc.extraServices.extraCradle" type="checkbox"
+              name="extraCradle" id="extraCradle">
+          </div>
+          <div>
+            <select class="form-select" [(ngModel)]="selectedAcc!.occupationStatus" name="occupationStatus"
+              id="occupationStatus" [ngStyle]="getOccupationStatusStyle()">
+              <option value="DESOCUPADO">Desocupado</option>
+              <option value="OCUPADO">Ocupado</option>
+              <option value="MANUTENCAO">Manutenção</option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <label for="observation" class="form-label mt-3">Observações</label>
+          <textarea class="form-control" [(ngModel)]="selectedAcc!.observation" name="observation" id="observation"
+            rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" id="saveButton" (click)="onEditExtraServices(selectedAcc!, selectedAcc!.id)">Salvar Alterações</button>
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Fechar</button>
+    </div>
+  </form>
+</ng-template>
+
+<div class="alert alert-success" role="alert" *ngIf="atualizacaoBemSucedida">
+  <h4 class="alert-heading">Aleração Efetuada</h4>
+  <p>Sua alteração foi salva com sucesso!</p>
+</div>
+<app-footer></app-footer>

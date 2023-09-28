@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card-header mb-3 pb-0 border-0" id="header">
+          <h4 class="fw-bold">Histórico de Hóspedes</h4>
+        </div>
+        <div class="table-responsive">
+          <input type="text" placeholder="Pesquisar..." (input)="onSearchChange($event)" id="searchInput">
+          <table class="table py-2 p-5">
+            <thead>
+              <tr>
+                <th scope="col">Acomodação</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Adultos</th>
+                <th scope="col">Crianças(+5 anos)</th>
+                <th scope="col">Crianças(-5 anos)</th>
+                <th scope="col">Pet</th>
+                <th scope="col">Check-in</th>
+                <th scope="col">Check-out</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let reservation of filteredReservations">
+              <tr>
+                <td>{{ accommodationNames.get(reservation.accommodationIdReference) }}</td>
+                <td>{{reservation.holderName}}</td>
+                <td>{{reservation.adults}}</td>
+                <td>{{reservation.child}}</td>
+                <td>{{reservation.babies}}</td>
+                <td>{{hasPetParse(reservation.hasPet)}}</td>
+                <td>{{reservation.checkin}}</td>
+                <td>{{reservation.checkout}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-footer></app-footer>

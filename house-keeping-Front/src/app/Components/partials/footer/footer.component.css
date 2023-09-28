@@ -1,0 +1,12 @@
+#footerText{
+    font-family: Roboto;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+#footerContainer {
+    z-index: 1030;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}

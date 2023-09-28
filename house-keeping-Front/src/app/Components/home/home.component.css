@@ -1,0 +1,88 @@
+.container{
+    margin-bottom: 50px;
+}
+.dropdown-item{
+    cursor: pointer;
+}
+
+.card-body{
+    transition: 0.3s;
+    border-radius: 5px;   
+}
+
+.card-body:hover{
+    background-color: #CACEF3;
+    transition: 0.3s;
+}
+
+.card-title, .guestNumber{
+    color: #282E69;
+    font-family: Roboto Condensed;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 13px !important;
+}
+
+.guestNumber{
+    font-size: 30px;
+    text-align: end;
+    margin-bottom: 16px !important;
+}
+
+.vacatedClass, .cleanClass, .truePetClass{
+    font-family: Roboto;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #35AE56;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.occupiedClass, .dirtyClass, .falsePetClass{
+    font-family: Roboto;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #EB3D45;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.maintenanceClass{
+    font-family: Roboto;
+    font-weight: 500;
+    color: #FFFFFF;
+    background-color: #EBC859;
+    display: inline-flex;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.checkin, .checkout{
+    font-family: Roboto;
+    font-weight: 500;
+    text-align: end;
+    border: 2px solid #606EEB;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-flex;
+}
+
+#extraBed, #extraCradle, #extraCleaning{
+    background-color: #282E69;
+    border: #282E69;
+}
+
+#saveButton{
+    background-color: #282E69;
+    transition: 0.3s;
+}
+
+#saveButton:hover{
+    background-color: #3b438d;
+    transition: 0.3s;
+}
+
+
+
