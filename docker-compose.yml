@@ -14,8 +14,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /dados_do_postgres:/var/lib/postgresql/data
-      - ./backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      - ./backupLocalData.sql:/docker-entrypoint-initdb.d/backupLocalData.sql
   backend:
     build:
       context: ./housekeepingBack
