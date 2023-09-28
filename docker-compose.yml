@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  dbdata:
+
 services:
   postgres:
     image: postgres:15
@@ -35,6 +38,3 @@ services:
       - "8082:80"
     depends_on:
       - backend
-
-volumes:
-  dbdata:
