@@ -155,7 +155,6 @@ export class HomeComponent implements OnInit {
   }
 
   private handleHttpSuccess(response: any): void {
-    console.log(response);
     this.atualizacaoBemSucedida = true;
     setTimeout(() => {
       this.atualizacaoBemSucedida = false;

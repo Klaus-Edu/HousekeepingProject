@@ -61,12 +61,7 @@ Os próximos passos para este projeto incluem:
 
 - Certifique-se de ter instalado em sua máquina o Docker e Docker-Compose, e que estejam atualizados;
 - Certifique-se de possuir o WSL2 instalado para conseguir utilizar os containers apropriadamente;
-- No diretório raiz do Backend, localizado na pasta housekeepingBack, em um terminal rode o comando:
-  
-  ```
-  mvn package
-  ```
-- Na pasta raiz do projeto, onde está o arquivo `docker-compose.yml`, em um terminal rode o comando:
+- No diretório raiz do projeto, onde está o arquivo `docker-compose.yml`, em um terminal rode o comando:
   
   ```
   docker-compose up
