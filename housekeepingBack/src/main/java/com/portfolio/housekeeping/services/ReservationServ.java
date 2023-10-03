@@ -5,7 +5,6 @@ import com.portfolio.housekeeping.repositories.ReservationRepo;
 import com.portfolio.housekeeping.services.exceptions.IllegalArgException;
 import com.portfolio.housekeeping.services.exceptions.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class ReservationServ {
 
     @Autowired
     private final ReservationRepo reservationRepo;
+
+    public ReservationServ(ReservationRepo reservationRepo) {
+        this.reservationRepo = reservationRepo;
+    }
 
     public List<Reservation> findAllReservation() {
         List<Reservation> reservations = reservationRepo.findAll();

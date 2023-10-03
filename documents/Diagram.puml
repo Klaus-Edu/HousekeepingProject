@@ -23,7 +23,7 @@ class com.portfolio.housekeeping.config.SwaggerConfig {
 + OpenAPI api()
 - Map<String,Schema> generateSchemas()
 }
-class com.portfolio.housekeeping.DTOs.AccommodationDto {
+class com.portfolio.housekeeping.dtos.AccommodationDto {
 - String name
 - String observation
 - CleaningStatus cleaningStatus
@@ -64,7 +64,7 @@ class com.portfolio.housekeeping.resource.exceptions.ResourceExceptionHandler {
 + ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException,HttpServletRequest)
 + ResponseEntity<StandardError> illegalArg(IllegalArgException,HttpServletRequest)
 }
-class com.portfolio.housekeeping.DTOs.ReservationDto {
+class com.portfolio.housekeeping.dtos.ReservationDto {
 - String holderName
 - int adults
 - int child
@@ -87,7 +87,7 @@ class com.portfolio.housekeeping.models.Accommodation {
 + OccupationStatus getOccupationStatus()
 + void setOccupationStatus(OccupationStatus)
 }
-class com.portfolio.housekeeping.DTOs.ExtraServicesDto {
+class com.portfolio.housekeeping.dtos.ExtraServicesDto {
 - Boolean extraCleaning
 - Boolean extraBed
 - Boolean extraCradle
@@ -138,7 +138,7 @@ class com.portfolio.housekeeping.resource.ReservationResource {
 + ResponseEntity<Object> editReservation(Long,ReservationDto)
 + void deleteReservation(Long)
 }
-class com.portfolio.housekeeping.DTOs.PartialAccommodationDto {
+class com.portfolio.housekeeping.dtos.PartialAccommodationDto {
 - String observation
 - CleaningStatus cleaningStatus
 - OccupationStatus occupationStatus

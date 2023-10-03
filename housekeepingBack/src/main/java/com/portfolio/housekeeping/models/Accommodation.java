@@ -3,23 +3,15 @@ package com.portfolio.housekeeping.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolio.housekeeping.models.enums.CleaningStatus;
 import com.portfolio.housekeeping.models.enums.OccupationStatus;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_accommodation")
-@Data
 public class Accommodation implements Serializable {
 
     @Id
@@ -70,6 +62,41 @@ public class Accommodation implements Serializable {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
+    }
+
+    public List<Reservation> getReservation() {
+        return reservation;
+    }
+
+    public ExtraServices getExtraServices() {
+        return extraServices;
+    }
+
+    public void setExtraServices(ExtraServices extraServices) {
+        this.extraServices = extraServices;
+    }
     @Override
     public String toString() {
         return "Accommodation{" +
@@ -79,5 +106,18 @@ public class Accommodation implements Serializable {
                 ", cleaningStatus=" + cleaningStatus +
                 ", occupationStatus=" + occupationStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Accommodation that = (Accommodation) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(observation, that.observation) && Objects.equals(cleaningStatus, that.cleaningStatus) && Objects.equals(occupationStatus, that.occupationStatus) && Objects.equals(reservation, that.reservation) && Objects.equals(extraServices, that.extraServices);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, observation, cleaningStatus, occupationStatus, reservation, extraServices);
     }
 }

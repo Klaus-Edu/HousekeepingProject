@@ -4,9 +4,9 @@ package com.portfolio.housekeeping.resource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.portfolio.housekeeping.DTOs.AccommodationDto;
-import com.portfolio.housekeeping.DTOs.ExtraServicesDto;
-import com.portfolio.housekeeping.DTOs.PartialAccommodationDto;
+import com.portfolio.housekeeping.dtos.AccommodationDto;
+import com.portfolio.housekeeping.dtos.ExtraServicesDto;
+import com.portfolio.housekeeping.dtos.PartialAccommodationDto;
 import com.portfolio.housekeeping.models.Accommodation;
 import com.portfolio.housekeeping.models.ExtraServices;
 import com.portfolio.housekeeping.models.enums.CleaningStatus;
@@ -398,7 +398,7 @@ class AccommodationResourceTest {
     }
 
     private void createExtraServicesDto() {
-        extraServicesDto = new ExtraServicesDto(false, true, true);
+        extraServicesDto = new ExtraServicesDto(3L,false, true, true);
     }
 
     private void createPartialAccommodationDto() {

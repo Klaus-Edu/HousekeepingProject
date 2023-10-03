@@ -4,7 +4,7 @@ package com.portfolio.housekeeping.resource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.portfolio.housekeeping.DTOs.ReservationDto;
+import com.portfolio.housekeeping.dtos.ReservationDto;
 import com.portfolio.housekeeping.models.Accommodation;
 import com.portfolio.housekeeping.models.ExtraServices;
 import com.portfolio.housekeeping.models.Reservation;

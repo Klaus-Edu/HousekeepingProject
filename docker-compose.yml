@@ -14,6 +14,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      - ./postgres-data:/var/lib/postgresql/data
       - ./backupLocalData.sql:/docker-entrypoint-initdb.d/backupLocalData.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
@@ -23,6 +24,7 @@ services:
   backend:
     build:
       context: ./housekeepingBack
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
