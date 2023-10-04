@@ -3,8 +3,14 @@ package com.portfolio.housekeeping.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.portfolio.housekeeping.models.enums.CleaningStatus;
 import com.portfolio.housekeeping.models.enums.OccupationStatus;
-import jakarta.persistence.*;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +34,13 @@ public class Accommodation implements Serializable {
 
     @OneToOne(mappedBy = "accommodation", cascade = CascadeType.ALL)
     private ExtraServices extraServices;
-
     public Accommodation() {
+
     }
 
-    public Accommodation(Long id, String name, String observation, CleaningStatus cleaningStatus, OccupationStatus occupationStatus, List<Reservation> reservation, ExtraServices extraServices) {
+    public Accommodation(Long id, String name, String observation,
+                         CleaningStatus cleaningStatus, OccupationStatus occupationStatus,
+                         List<Reservation> reservation, ExtraServices extraServices) {
         this.id = id;
         this.name = name;
         this.observation = observation;
@@ -97,15 +105,16 @@ public class Accommodation implements Serializable {
     public void setExtraServices(ExtraServices extraServices) {
         this.extraServices = extraServices;
     }
+
     @Override
     public String toString() {
-        return "Accommodation{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", observation='" + observation + '\'' +
-                ", cleaningStatus=" + cleaningStatus +
-                ", occupationStatus=" + occupationStatus +
-                '}';
+        return "Accommodation{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", observation='" + observation + '\''
+                + ", cleaningStatus=" + cleaningStatus
+                + ", occupationStatus=" + occupationStatus
+                + '}';
     }
 
     @Override

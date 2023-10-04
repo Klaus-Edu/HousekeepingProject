@@ -15,7 +15,9 @@ public class AccommodationDto {
     @NotNull
     private OccupationStatus occupationStatus;
 
-    public AccommodationDto(){};
+    public AccommodationDto() {
+
+    };
 
     public AccommodationDto(String name, String observation, CleaningStatus cleaningStatus, OccupationStatus occupationStatus) {
         this.name = name;
