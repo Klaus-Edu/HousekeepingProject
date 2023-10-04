@@ -33,7 +33,6 @@ Alguns aspectos interessantes deste projeto incluem:
   - Spring Validator
   - Spring Starter Web
   - PostgreSQL Driver
-  - Lombok
   - Spring Doc OpenAPI (Swagger)
 
 - PostgreSQL
